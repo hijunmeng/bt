@@ -1,4 +1,4 @@
-package com.junmeng.bt;
+package com.junmeng.bt.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;

@@ -1,4 +1,4 @@
-package com.junmeng.bt;
+package com.junmeng.bt.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.inuker.bluetooth.library.search.SearchResult;
+import com.junmeng.bt.R;
 
 import java.util.ArrayList;
 import java.util.List;

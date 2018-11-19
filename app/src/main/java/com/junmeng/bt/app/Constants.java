@@ -1,4 +1,4 @@
-package com.junmeng.bt;
+package com.junmeng.bt.app;
 
 public class Constants {
 

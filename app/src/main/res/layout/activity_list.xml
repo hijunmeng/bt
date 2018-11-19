@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ListActivity">
+    tools:context=".activity.ListActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_bluetooth"
@@ -26,6 +26,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="扫描"
+        android:background="@color/colorPrimary"
+        android:textColor="@android:color/white"
         android:onClick="onClickScan"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -37,6 +39,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="停止"
+        android:background="@color/colorPrimary"
+        android:textColor="@android:color/white"
         android:onClick="onClickStopScan"
         app:layout_constraintStart_toEndOf="@+id/btn_scan"
         app:layout_constraintTop_toTopOf="parent" />

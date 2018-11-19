@@ -4,7 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".activity.MainActivity">
+
+
+    <android.support.constraint.Group
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:constraint_referenced_ids="btn_cat,btn_dog,btn_pig,btn_sheep" />
 
     <Button
         android:id="@+id/btn_cat"
@@ -26,9 +33,11 @@
         android:layout_marginStart="80dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
+        android:background="@color/colorPrimary"
         android:onClick="onClickV1"
         android:text="视频1"
-        app:layout_constraintEnd_toStartOf="@+id/btn_v2"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_pig" />
 
@@ -39,9 +48,11 @@
         android:layout_marginStart="80dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
+        android:background="@color/colorPrimary"
         android:onClick="onClickV3"
         android:text="视频3"
-        app:layout_constraintEnd_toStartOf="@+id/btn_v4"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_v1" />
 
@@ -49,29 +60,39 @@
         android:id="@+id/btn_v4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginEnd="80dp"
+        android:background="@color/colorPrimary"
         android:onClick="onClickV4"
         android:text="视频4"
+        android:textColor="@android:color/white"
         app:layout_constraintBaseline_toBaselineOf="@+id/btn_v3"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline" />
 
     <Button
         android:id="@+id/btn_v2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginEnd="80dp"
+        android:background="@color/colorPrimary"
         android:onClick="onClickV2"
         android:text="视频2"
+        android:textColor="@android:color/white"
         app:layout_constraintBaseline_toBaselineOf="@+id/btn_v1"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline" />
 
     <Button
         android:id="@+id/btn_dog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="80dp"
+        android:background="@color/colorPrimary"
         android:onClick="onClickDog"
         android:text="狗叫"
+        android:textColor="@android:color/white"
         app:layout_constraintBaseline_toBaselineOf="@+id/btn_cat"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -104,20 +125,45 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:background="@color/colorPrimary"
         android:onClick="onClickConnect"
         android:text="重新连接"
+        android:textColor="@android:color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_status"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        android:gravity="right"
         android:text="连接状态"
         app:layout_constraintBaseline_toBaselineOf="@+id/btn_connect"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn_connect" />
+
+    <Button
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        android:background="@color/colorPrimary"
+        android:onClick="onClickBack"
+        android:text="返回"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_v3" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
 
 </android.support.constraint.ConstraintLayout>

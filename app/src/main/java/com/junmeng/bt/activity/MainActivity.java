@@ -1,32 +1,18 @@
-package com.junmeng.bt;
+package com.junmeng.bt.activity;
 
-import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.inuker.bluetooth.library.BluetoothClient;
-import com.inuker.bluetooth.library.beacon.Beacon;
-import com.inuker.bluetooth.library.connect.response.BleConnectResponse;
-import com.inuker.bluetooth.library.model.BleGattProfile;
-import com.inuker.bluetooth.library.search.SearchRequest;
-import com.inuker.bluetooth.library.search.SearchResult;
-import com.inuker.bluetooth.library.search.response.SearchResponse;
-import com.inuker.bluetooth.library.utils.BluetoothLog;
-import com.inuker.bluetooth.library.utils.BluetoothUtils;
+import com.junmeng.bt.R;
+import com.junmeng.bt.app.MyApplication;
+import com.junmeng.bt.base.BaseActivity;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.UUID;
-
-import static android.bluetooth.BluetoothDevice.BOND_BONDING;
-import static com.inuker.bluetooth.library.Constants.REQUEST_SUCCESS;
-import static com.junmeng.bt.MyApplication.mClient;
 
 /**
  * https://blog.csdn.net/Fight_0513/article/details/79855749
@@ -168,6 +154,16 @@ public class MainActivity extends BaseActivity {
     public void onClickV4(View view) {
         if(isConnectSuccess){
             sendCmd(4);
+        }
+    }
+
+    /**
+     * 返回
+     * @param view
+     */
+    public void onClickBack(View view) {
+        if(isConnectSuccess){
+            sendCmd(9);
         }
     }
 }

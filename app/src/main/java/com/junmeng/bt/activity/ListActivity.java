@@ -1,4 +1,4 @@
-package com.junmeng.bt;
+package com.junmeng.bt.activity;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -17,6 +17,12 @@ import com.inuker.bluetooth.library.search.SearchRequest;
 import com.inuker.bluetooth.library.search.SearchResult;
 import com.inuker.bluetooth.library.search.response.SearchResponse;
 import com.inuker.bluetooth.library.utils.BluetoothUtils;
+import com.junmeng.bt.R;
+import com.junmeng.bt.adapter.BluetoothListAdapter;
+import com.junmeng.bt.app.Constants;
+import com.junmeng.bt.app.MyApplication;
+import com.junmeng.bt.base.BaseActivity;
+import com.junmeng.bt.util.SpUtils;
 
 import java.util.Set;
 

@@ -1,4 +1,4 @@
-package com.junmeng.bt;
+package com.junmeng.bt.app;
 
 import android.app.Application;
 import android.bluetooth.BluetoothDevice;
@@ -6,8 +6,8 @@ import android.bluetooth.BluetoothDevice;
 import com.inuker.bluetooth.library.BluetoothClient;
 
 public class MyApplication extends Application {
-    static BluetoothClient mClient;
-    static BluetoothDevice mDevice;
+    public static BluetoothClient mClient;
+    public  static BluetoothDevice mDevice;
     @Override
     public void onCreate() {
         super.onCreate();
