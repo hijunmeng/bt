@@ -2,6 +2,9 @@ package com.junmeng.bt.activity;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.inuker.bluetooth.library.connect.listener.BluetoothStateListener;
 import com.inuker.bluetooth.library.connect.response.BleConnectResponse;
 import com.inuker.bluetooth.library.model.BleGattProfile;
 import com.inuker.bluetooth.library.search.SearchRequest;
@@ -36,6 +40,14 @@ public class ListActivity extends BaseActivity {
     private Button scanBtn;
     private Button stopBtn;
 
+    private final BluetoothStateListener mBluetoothStateListener = new BluetoothStateListener() {
+        @Override
+        public void onBluetoothStateChanged(boolean openOrClosed) {
+            showToast(openOrClosed ? "蓝牙已打开" : "蓝牙已关闭");
+        }
+
+    };
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,20 +55,26 @@ public class ListActivity extends BaseActivity {
         initViews();
         initRecycleView();
 
-        if(MyApplication.mClient.isBluetoothOpened()){
+        if(!MyApplication.mClient.isBluetoothOpened()){
             MyApplication.mClient.openBluetooth();
         }
+        MyApplication.mClient.registerBluetoothStateListener(mBluetoothStateListener);
 
         bluetoothAdapter = BluetoothUtils.getBluetoothAdapter();
+
         checkExistDevice();
     }
 
-
+    /**
+     * 检查已经成功连接过的设备，如果有并且配对过则直接进行连接
+     */
     private void checkExistDevice(){
+
         String address=SpUtils.getString(this,Constants.BL_DEVICE_ADDRESS,"");
         if(TextUtils.isEmpty(address)){
            return ;
         }
+
         Set<BluetoothDevice> pairedDevices = bluetoothAdapter.getBondedDevices();
         if (pairedDevices.size() > 0) {
             for (BluetoothDevice device : pairedDevices) {
@@ -68,6 +86,7 @@ public class ListActivity extends BaseActivity {
         }
 
     }
+
     private void initRecycleView() {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter = new BluetoothListAdapter(this));
@@ -113,7 +132,7 @@ public class ListActivity extends BaseActivity {
         adapter.getList().clear();
         adapter.notifyDataSetChanged();
         SearchRequest request = new SearchRequest.Builder()
-                //.searchBluetoothLeDevice(5000, 3)   // 先扫BLE设备3次，每次3s
+                //.searchBluetoothLeDevice(5000, 3)  // 先扫BLE设备3次，每次3s
                 .searchBluetoothClassicDevice(10000) // 再扫经典蓝牙5s
                 .searchBluetoothLeDevice(10000)      // 再扫BLE设备2s
                 .build();
@@ -155,4 +174,6 @@ public class ListActivity extends BaseActivity {
     public void onClickStopScan(View view) {
         MyApplication.mClient.stopSearch();
     }
+
+
 }
