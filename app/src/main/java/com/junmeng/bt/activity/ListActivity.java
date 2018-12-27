@@ -14,9 +14,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.inuker.bluetooth.library.connect.listener.BleConnectStatusListener;
 import com.inuker.bluetooth.library.connect.listener.BluetoothStateListener;
 import com.inuker.bluetooth.library.connect.response.BleConnectResponse;
 import com.inuker.bluetooth.library.model.BleGattProfile;
+import com.inuker.bluetooth.library.receiver.listener.BluetoothBondListener;
 import com.inuker.bluetooth.library.search.SearchRequest;
 import com.inuker.bluetooth.library.search.SearchResult;
 import com.inuker.bluetooth.library.search.response.SearchResponse;
@@ -30,7 +32,9 @@ import com.junmeng.bt.util.SpUtils;
 
 import java.util.Set;
 
+import static com.inuker.bluetooth.library.Constants.BOND_NONE;
 import static com.inuker.bluetooth.library.Constants.REQUEST_SUCCESS;
+import static com.inuker.bluetooth.library.Constants.STATUS_CONNECTED;
 
 public class ListActivity extends BaseActivity {
     private static final String TAG = "ListActivity";
@@ -48,6 +52,14 @@ public class ListActivity extends BaseActivity {
 
     };
 
+    private final BluetoothBondListener mBluetoothBondListener = new BluetoothBondListener() {
+        @Override
+        public void onBondStateChanged(String mac, int bondState) {
+            // bondState = Constants.BOND_NONE, BOND_BONDING, BOND_BONDED
+            showToast(mac+": bondState=  "+bondState);
+        }
+    };
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +75,8 @@ public class ListActivity extends BaseActivity {
         bluetoothAdapter = BluetoothUtils.getBluetoothAdapter();
 
         checkExistDevice();
+
+
     }
 
     /**
@@ -95,6 +109,13 @@ public class ListActivity extends BaseActivity {
             public void OnItemClick(View view, final SearchResult device, int position) {
                 onClickStopScan(null);
                 showLoading();
+                MyApplication.mClient.registerConnectStatusListener(device.getAddress(), new BleConnectStatusListener() {
+                    @Override
+                    public void onConnectStatusChanged(String mac, int status) {
+
+                        showToast(status==STATUS_CONNECTED?"连接":"断开");
+                    }
+                });
                 MyApplication.mClient.connect(device.getAddress(), new BleConnectResponse() {
                     @Override
                     public void onResponse(int code, BleGattProfile data) {
